@@ -15,36 +15,41 @@ def calculate(operation, num1, num2=None):
             if num2 is None:
                 raise ValueError("Addition requires two operands")
             result = add(num1, num2)
+
         elif operation == "subtract":
             if num2 is None:
                 raise ValueError("Subtraction requires two operands")
             result = subtract(num1, num2)
+
         elif operation == "multiply":
             if num2 is None:
                 raise ValueError("Multiplication requires two operands")
             result = multiply(num1, num2)
+
         elif operation == "divide":
             if num2 is None:
                 raise ValueError("Division requires two operands")
             result = divide(num1, num2)
+
         elif operation == "power":
             if num2 is None:
-                raise ValueError("Power requires two operands")
+                raise ValueError("Power operation requires two operands")
             result = power(num1, num2)
-        elif operation == "sqrt":
+
+        elif operation in ("square_root", "sqrt"):
             result = square_root(num1)
+
         else:
             click.echo(f"Unknown operation: {operation}")
             sys.exit(1)
 
-        # Print result nicely
-        if isinstance(result, float) and result.is_integer():
-            click.echo(int(result))
-        else:
-            click.echo(f"{result:.2f}" if isinstance(result, float) else result)
+        click.echo(result)
 
     except ValueError as e:
         click.echo(f"Error: {e}")
+        sys.exit(1)
+    except ZeroDivisionError:
+        click.echo("Error: Division by zero is not allowed")
         sys.exit(1)
     except Exception as e:
         click.echo(f"Unexpected error: {e}")
