@@ -1,9 +1,3 @@
-"""
-Calculator Module - Basic arithmetic operations
-Students will extend this with more functions
-"""
-
-
 def add(a, b):
     """Add two numbers together"""
     return a + b
@@ -35,8 +29,6 @@ def square_root(a):
         raise ValueError("Cannot calculate square root of negative number")
     return a**0.5
 
-
-# TODO: Students will add multiply, divide, power, sqrt functions
 
 if __name__ == "__main__":
     print("🧮 Calculator Module")

@@ -2,6 +2,7 @@ import subprocess
 import sys
 import pytest
 
+
 class TestCLIIntegration:
     """Test CLI application integrating with calculator module"""
 
@@ -24,8 +25,8 @@ class TestCLIIntegration:
     def test_cli_divide_integration(self):
         result = self.run_cli("divide", "5", "3")
         assert result.returncode == 0
-        # approximate comparison
-        assert float(result.stdout.strip()) == pytest.approx(5/3, 0.01)
+        # approximate comparison for float
+        assert float(result.stdout.strip()) == pytest.approx(5 / 3, 0.01)
 
     def test_cli_subtract_integration(self):
         result = self.run_cli("subtract", "5", "3")
@@ -33,6 +34,7 @@ class TestCLIIntegration:
         assert result.stdout.strip() == "2"
 
     def test_cli_subtract_missing_operand_error(self):
+        """Test CLI handles missing operand for subtraction gracefully"""
         result = self.run_cli("subtract", "5")
         assert result.returncode == 1
-        assert result.stdout.strip().startswith("Unexpected error:")
+        assert result.stdout.strip() == "Error: Subtraction requires two operands"
